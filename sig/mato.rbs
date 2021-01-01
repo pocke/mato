@@ -5,23 +5,23 @@ end
 Mato::VERSION: String
 
 class Mato::AnchorBuilder
-  public
+  attr_reader anchor_icon_element: String
 
-  def anchor_icon_element: () -> untyped
+  @id_map: Hash[String, Integer]
 
   def context: () -> untyped
 
-  def make_anchor_element: (untyped hx) -> untyped
+  def make_anchor_element: (Nokogiri::XML::Node hx) -> String
 
-  def make_anchor_id: (untyped hx) -> untyped
+  def make_anchor_id: (Nokogiri::XML::Node hx) -> String
 
   private
 
   def initialize: (?String anchor_icon_element) -> untyped
 
-  def make_anchor_id_prefix: (untyped text) -> untyped
+  def make_anchor_id_prefix: (String text) -> String
 
-  def make_anchor_id_suffix: (untyped text) -> untyped
+  def make_anchor_id_suffix: (String text) -> String
 end
 
 Mato::AnchorBuilder::CSS_CLASS_NAME: String
@@ -153,18 +153,15 @@ class Mato::HtmlFilters::BareInlineElement
   def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 end
 
-Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set[untyped]
+Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set[String]
 
 class Mato::HtmlFilters::MentionLink
   include Mato::Concerns::HtmlNodeCheckable
 
-  public
+  attr_reader pattern: Regexp
+  attr_reader link_builder: ^(Hash[String, Array[Nokogiri::XML::Node]]) -> void
 
   def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
-
-  def link_builder: () -> untyped
-
-  def pattern: () -> untyped
 
   private
 
@@ -186,13 +183,15 @@ class Mato::HtmlFilters::Sanitization
 end
 
 class Mato::HtmlFilters::SectionAnchor
+  @anchor_icon_element: String
+
   public
 
-  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> void
 
   private
 
-  def initialize: (?untyped anchor_icon_element) -> untyped
+  def initialize: (?String anchor_icon_element) -> void
 end
 
 Mato::HtmlFilters::SectionAnchor::HX_PATTERN: String

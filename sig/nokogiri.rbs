@@ -334,7 +334,7 @@ class Nokogiri::EncodingHandler
 end
 
 module Nokogiri::HTML
-  def self.fragment: (untyped string, ?untyped encoding) -> untyped
+  def self.fragment: (String string, ?untyped encoding) -> Nokogiri::HTML::DocumentFragment
 
   def self.parse: (untyped thing, ?untyped url, ?untyped encoding, ?untyped options) { (*untyped) -> untyped } -> untyped
 end
@@ -1025,7 +1025,7 @@ class Nokogiri::XML::DocumentFragment < Nokogiri::XML::Node
 
   public
 
-  def css: (*untyped args) -> untyped
+  def css: (*String args) -> Nokogiri::XML::NodeSet
 
   def dup: () -> untyped
 
@@ -1226,11 +1226,11 @@ class Nokogiri::XML::Node
 
   def cdata?: () -> untyped
 
-  def child: () -> untyped
+  def child: () -> Nokogiri::XML::Node
 
   def children: () -> Nokogiri::XML::NodeSet
 
-  def children=: (Nokogiri::XML::NodeSet node_or_tags) -> Nokogiri::XML::NodeSet
+  def children=: (Nokogiri::XML::NodeSet | String node_or_tags) -> Nokogiri::XML::NodeSet
 
   def classes: () -> untyped
 
@@ -1238,9 +1238,9 @@ class Nokogiri::XML::Node
 
   def comment?: () -> untyped
 
-  def content: () -> untyped
+  def content: () -> String
 
-  def content=: (untyped string) -> untyped
+  def content=: (String string) -> String
 
   def create_external_subset: (untyped, untyped, untyped) -> untyped
 
@@ -1338,9 +1338,9 @@ class Nokogiri::XML::Node
 
   def next_sibling: () -> untyped
 
-  def node_name: () -> untyped
+  def node_name: () -> String
 
-  def node_name=: (untyped) -> untyped
+  def node_name=: (String) -> String
 
   def node_type: () -> untyped
 
@@ -1374,7 +1374,7 @@ class Nokogiri::XML::Node
 
   def remove_class: (?untyped name) -> untyped
 
-  def replace: (untyped node_or_tags) -> untyped
+  def replace: (untyped node_or_tags) -> Nokogiri::XML::NodeSet
 
   def serialize: (*untyped args) { (*untyped) -> untyped } -> untyped
 
@@ -1614,7 +1614,7 @@ class Nokogiri::XML::NodeSet
 
   alias clone dup
 
-  def css: (*untyped args) -> untyped
+  def css: (*String args) -> Nokogiri::XML::NodeSet
 
   def delete: (untyped) -> untyped
 

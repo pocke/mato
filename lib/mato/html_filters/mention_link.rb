@@ -24,8 +24,9 @@ module Mato
 
       # @param [Nokogiri::HTML::DocumentFragment] doc
       def call(doc)
-        # @type var candidate_map: Hash[String, Array[Nokogiri::XML::Element]]
+        # @type var candidate_map: Hash[String, Array[Nokogiri::XML::Node]]
         candidate_map = {}
+        # @type var candidates: Array[Nokogiri::XML::NodeSet]
         candidates = []
 
         doc.xpath('.//text()').each do |text_node|
