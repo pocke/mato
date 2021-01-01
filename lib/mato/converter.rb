@@ -37,7 +37,7 @@ module Mato
       content_lines.join("\n").tap do |c|
         # fixup newlines removed by String#split
         content.scan(/\n+\z/) do |matched|
-          c << matched
+          c << (_ = matched)
         end
       end
     end

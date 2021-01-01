@@ -17,7 +17,7 @@ class Mato::AnchorBuilder
 
   private
 
-  def initialize: (?untyped anchor_icon_element) -> untyped
+  def initialize: (?String anchor_icon_element) -> untyped
 
   def make_anchor_id_prefix: (untyped text) -> untyped
 
@@ -100,23 +100,18 @@ Mato::Config::DEFAULT_MARKDOWN_PARSE_OPTIONS: Array[untyped]
 Mato::Config::DEFAULT_MARKDOWN_RENDER_OPTIONS: Array[untyped]
 
 class Mato::Converter
-  public
+  attr_reader processor: Mato::Processor
+  attr_reader content: String
+  attr_reader flavor: Symbol
+  attr_reader content_lines: Array[String]
 
-  def content: () -> untyped
-
-  def content_lines: () -> untyped
-
-  def convert_headings!: (untyped document) -> untyped
-
-  def flavor: () -> untyped
-
-  def processor: () -> untyped
+  def convert_headings!: (untyped document) -> void
 
   def run: () -> untyped
 
   private
 
-  def initialize: (untyped processor, untyped content, untyped flavor) -> untyped
+  def initialize: (Mato::Processor processor, String content, Symbol flavor) -> untyped
 end
 
 Mato::Converter::FLAVORES: Set[Symbol]
