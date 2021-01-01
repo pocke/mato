@@ -1,0 +1,353 @@
+module Mato
+  def self.define: () { (*untyped) -> untyped } -> untyped
+end
+
+Mato::VERSION: String
+
+class Mato::AnchorBuilder
+  public
+
+  def anchor_icon_element: () -> untyped
+
+  def context: () -> untyped
+
+  def make_anchor_element: (untyped hx) -> untyped
+
+  def make_anchor_id: (untyped hx) -> untyped
+
+  private
+
+  def initialize: (?untyped anchor_icon_element) -> untyped
+
+  def make_anchor_id_prefix: (untyped text) -> untyped
+
+  def make_anchor_id_suffix: (untyped text) -> untyped
+end
+
+Mato::AnchorBuilder::CSS_CLASS_NAME: String
+
+Mato::AnchorBuilder::DEFAULT_ANCHOR_ICON_ELEMENT: String
+
+module Mato::Concerns
+end
+
+module Mato::Concerns::HtmlNodeCheckable
+  def self.has_ancestor?: (untyped node, *untyped tags) -> untyped
+
+  private
+
+  def has_ancestor?: (untyped node, *untyped tags) -> untyped
+end
+
+class Mato::Config
+  public
+
+  def append_html_filter: (untyped html_filter, ?timeout: untyped, ?on_timeout: untyped, ?on_error: untyped) -> untyped
+
+  def append_markdown_filter: (untyped markdown_filter, ?timeout: untyped, ?on_timeout: untyped, ?on_error: untyped) -> untyped
+
+  def append_text_filter: (untyped text_filter, ?timeout: untyped, ?on_timeout: untyped, ?on_error: untyped) -> untyped
+
+  def configure: () { (*untyped) -> untyped } -> untyped
+
+  def document_factory: () -> untyped
+
+  def document_factory=: (untyped) -> untyped
+
+  def html_filters: () -> untyped
+
+  def html_filters=: (untyped) -> untyped
+
+  def html_parser: () -> untyped
+
+  def html_parser=: (untyped) -> untyped
+
+  def markdown_extensions: () -> untyped
+
+  def markdown_extensions=: (untyped) -> untyped
+
+  def markdown_filters: () -> untyped
+
+  def markdown_filters=: (untyped) -> untyped
+
+  def markdown_parse_options: () -> untyped
+
+  def markdown_parse_options=: (untyped) -> untyped
+
+  def markdown_parser: () -> untyped
+
+  def markdown_parser=: (untyped) -> untyped
+
+  def markdown_render_options: () -> untyped
+
+  def markdown_render_options=: (untyped) -> untyped
+
+  def text_filters: () -> untyped
+
+  def text_filters=: (untyped) -> untyped
+
+  private
+
+  def initialize: () -> untyped
+
+  def wrap: (untyped filter, timeout: untyped, on_timeout: untyped, on_error: untyped) -> untyped
+end
+
+Mato::Config::DEFAULT_MARKDOWN_EXTENSIONS: Array[untyped]
+
+Mato::Config::DEFAULT_MARKDOWN_PARSE_OPTIONS: Array[untyped]
+
+Mato::Config::DEFAULT_MARKDOWN_RENDER_OPTIONS: Array[untyped]
+
+class Mato::Converter
+  public
+
+  def content: () -> untyped
+
+  def content_lines: () -> untyped
+
+  def convert_headings!: (untyped document) -> untyped
+
+  def flavor: () -> untyped
+
+  def processor: () -> untyped
+
+  def run: () -> untyped
+
+  private
+
+  def initialize: (untyped processor, untyped content, untyped flavor) -> untyped
+end
+
+Mato::Converter::FLAVORES: Set
+
+class Mato::Document
+  def self.empty: () -> untyped
+
+  public
+
+  def apply_html_filters: (*untyped html_filters) -> untyped
+
+  def css: (untyped selector) -> untyped
+
+  def fragment: () -> untyped
+
+  def marshal_dump: () -> untyped
+
+  def marshal_load: (untyped data) -> untyped
+
+  def render: (untyped renderer) -> untyped
+
+  def render_html: () -> untyped
+
+  def render_html_toc: () -> untyped
+
+  def xpath: (untyped query) -> untyped
+
+  private
+
+  def initialize: (untyped fragment) -> untyped
+end
+
+module Mato::HtmlFilters
+end
+
+class Mato::HtmlFilters::BareInlineElement
+  public
+
+  def call: (untyped doc) -> untyped
+end
+
+Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set
+
+class Mato::HtmlFilters::MentionLink
+  include Mato::Concerns::HtmlNodeCheckable
+
+  public
+
+  def call: (untyped doc) -> untyped
+
+  def link_builder: () -> untyped
+
+  def pattern: () -> untyped
+
+  private
+
+  def initialize: (?untyped pattern) { (*untyped) -> untyped } -> untyped
+end
+
+Mato::HtmlFilters::MentionLink::MENTION_PATTERN: Regexp
+
+class Mato::HtmlFilters::Sanitization
+  public
+
+  def call: (untyped doc) -> untyped
+
+  def sanitize: () -> untyped
+
+  private
+
+  def initialize: (sanitize: untyped) -> untyped
+end
+
+class Mato::HtmlFilters::SectionAnchor
+  public
+
+  def call: (untyped doc) -> untyped
+
+  private
+
+  def initialize: (?untyped anchor_icon_element) -> untyped
+end
+
+Mato::HtmlFilters::SectionAnchor::HX_PATTERN: String
+
+class Mato::HtmlFilters::SyntaxHighlight
+  public
+
+  def call: (untyped doc) -> untyped
+
+  def guess_lexer: (untyped language, untyped filename, untyped source) -> untyped
+
+  def parse_label: (untyped class_name) -> untyped
+
+  private
+
+  def format: (untyped lexer, untyped source) -> untyped
+
+  def formatter: () -> untyped
+
+  def highlight: (untyped pre) -> untyped
+
+  def initialize: (?on_rouge_error: untyped) -> untyped
+
+  def label_fragment: (untyped label) -> untyped
+end
+
+class Mato::HtmlFilters::SyntaxHighlight::RougeError < StandardError
+end
+
+class Mato::HtmlFilters::TaskList
+  public
+
+  def build_checkbox_node: (untyped checked) -> untyped
+
+  def call: (untyped doc) -> untyped
+
+  def checked_mark: () -> untyped
+
+  def has_checked_mark?: (untyped text_node) -> untyped
+
+  def has_unchecked_mark?: (untyped text_node) -> untyped
+
+  def trim_mark: (untyped content, untyped checked) -> untyped
+
+  def unchecked_mark: () -> untyped
+
+  def weave: (untyped li) -> untyped
+
+  private
+
+  def initialize: (?task_list_class: untyped, ?checkbox_class: untyped, ?convert_empty_task_list: untyped) -> untyped
+end
+
+Mato::HtmlFilters::TaskList::CHECKED_MARK: Regexp
+
+Mato::HtmlFilters::TaskList::CHECKED_MARK_FOR_EMPTY_TASK_LIST: Regexp
+
+Mato::HtmlFilters::TaskList::DEFAULT_CHECKBOX_CLASS: String
+
+Mato::HtmlFilters::TaskList::DEFAULT_TASK_LIST_CLASS: String
+
+Mato::HtmlFilters::TaskList::UNCHECKED_MARK: Regexp
+
+Mato::HtmlFilters::TaskList::UNCHECKED_MARK_FOR_EMPTY_TASK_LIST: Regexp
+
+class Mato::HtmlFilters::TokenLink
+  include Mato::Concerns::HtmlNodeCheckable
+
+  public
+
+  def builder: () -> untyped
+
+  def call: (untyped doc) -> untyped
+
+  def pattern: () -> untyped
+
+  private
+
+  def initialize: (untyped pattern) { (*untyped) -> untyped } -> untyped
+end
+
+class Mato::Processor
+  public
+
+  def config: () -> untyped
+
+  def convert: (untyped content, flavor: untyped) -> untyped
+
+  def parse_html: (untyped html) -> untyped
+
+  def parse_markdown: (untyped text) -> untyped
+
+  def process: (untyped input) -> untyped
+
+  def render_to_html: (untyped markdown_node) -> untyped
+
+  private
+
+  def initialize: (untyped config) -> untyped
+end
+
+module Mato::Renderers
+end
+
+class Mato::Renderers::HtmlRenderer
+  public
+
+  def call: (untyped doc) -> untyped
+end
+
+class Mato::Renderers::HtmlTocRenderer
+  public
+
+  def call: (untyped doc) -> untyped
+
+  private
+
+  def level: (untyped node) -> untyped
+end
+
+Mato::Renderers::HtmlTocRenderer::ANCHOR_SELECTOR: String
+
+Mato::Renderers::HtmlTocRenderer::H_SELECTOR: String
+
+class Mato::Rescue
+  public
+
+  def call: (untyped content) -> untyped
+
+  def filter: () -> untyped
+
+  def on_error: () -> untyped
+
+  private
+
+  def initialize: (untyped filter, on_error: untyped) -> untyped
+end
+
+class Mato::Timeout
+  public
+
+  def call: (untyped content) -> untyped
+
+  def duration_sec: () -> untyped
+
+  def filter: () -> untyped
+
+  def on_timeout: () -> untyped
+
+  private
+
+  def initialize: (untyped filter, timeout: untyped, on_timeout: untyped) -> untyped
+end
