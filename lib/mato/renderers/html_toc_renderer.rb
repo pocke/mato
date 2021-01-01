@@ -73,7 +73,7 @@ module Mato
       # @param [Nokogiri::XML::Node] node
       # @return [Integer] 1 to 6
       def level(node)
-        /\d+/.match(node.name)[0].to_i
+        (_ = /\d+/.match(node.name))[0].to_i
       end
     end
   end

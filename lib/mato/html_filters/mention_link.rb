@@ -24,6 +24,7 @@ module Mato
 
       # @param [Nokogiri::HTML::DocumentFragment] doc
       def call(doc)
+        # @type var candidate_map: Hash[String, Array[Nokogiri::XML::Element]]
         candidate_map = {}
         candidates = []
 

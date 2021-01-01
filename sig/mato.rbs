@@ -119,7 +119,7 @@ class Mato::Converter
   def initialize: (untyped processor, untyped content, untyped flavor) -> untyped
 end
 
-Mato::Converter::FLAVORES: Set[untyped]
+Mato::Converter::FLAVORES: Set[Symbol]
 
 class Mato::Document
   def self.empty: () -> untyped
@@ -155,7 +155,7 @@ end
 class Mato::HtmlFilters::BareInlineElement
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 end
 
 Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set[untyped]
@@ -165,7 +165,7 @@ class Mato::HtmlFilters::MentionLink
 
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   def link_builder: () -> untyped
 
@@ -181,7 +181,7 @@ Mato::HtmlFilters::MentionLink::MENTION_PATTERN: Regexp
 class Mato::HtmlFilters::Sanitization
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   def sanitize: () -> untyped
 
@@ -193,7 +193,7 @@ end
 class Mato::HtmlFilters::SectionAnchor
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   private
 
@@ -205,11 +205,11 @@ Mato::HtmlFilters::SectionAnchor::HX_PATTERN: String
 class Mato::HtmlFilters::SyntaxHighlight
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   def guess_lexer: (untyped language, untyped filename, untyped source) -> untyped
 
-  def parse_label: (untyped class_name) -> untyped
+  def parse_label: (String class_name) -> untyped
 
   private
 
@@ -232,7 +232,7 @@ class Mato::HtmlFilters::TaskList
 
   def build_checkbox_node: (untyped checked) -> untyped
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   def checked_mark: () -> untyped
 
@@ -244,7 +244,7 @@ class Mato::HtmlFilters::TaskList
 
   def unchecked_mark: () -> untyped
 
-  def weave: (untyped li) -> untyped
+  def weave: (Nokogiri::XML::Node li) -> untyped
 
   private
 
@@ -270,7 +270,7 @@ class Mato::HtmlFilters::TokenLink
 
   def builder: () -> untyped
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> untyped
 
   def pattern: () -> untyped
 
@@ -305,13 +305,13 @@ end
 class Mato::Renderers::HtmlRenderer
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> String
 end
 
 class Mato::Renderers::HtmlTocRenderer
   public
 
-  def call: (untyped doc) -> untyped
+  def call: (Nokogiri::HTML::DocumentFragment doc) -> String
 
   private
 

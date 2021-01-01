@@ -15,3 +15,6 @@ gem "rake", ">= 10.0"
 gem 'rr'
 gem "rubocop", '>= 0.78.0'
 gem 'rubocop-performance'
+
+gem 'rbs'
+gem 'steep'
