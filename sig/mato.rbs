@@ -119,7 +119,7 @@ class Mato::Converter
   def initialize: (untyped processor, untyped content, untyped flavor) -> untyped
 end
 
-Mato::Converter::FLAVORES: Set
+Mato::Converter::FLAVORES: Set[untyped]
 
 class Mato::Document
   def self.empty: () -> untyped
@@ -158,7 +158,7 @@ class Mato::HtmlFilters::BareInlineElement
   def call: (untyped doc) -> untyped
 end
 
-Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set
+Mato::HtmlFilters::BareInlineElement::STANDALONE_INLINE_ELEMENTS: Set[untyped]
 
 class Mato::HtmlFilters::MentionLink
   include Mato::Concerns::HtmlNodeCheckable
